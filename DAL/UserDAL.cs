@@ -8,7 +8,7 @@ namespace TaskMateApp.DAL
 {
     public static class UserDAL
     {
-        // ✅ LOGIN method
+        
         public static User Login(string username, string passwordPlain)
         {
             const string sql = @"
@@ -44,7 +44,7 @@ WHERE u.Username = @Username AND u.PasswordHash = @Password";
             }
         }
 
-        // ✅ GET ROLES (for ComboBox)
+        
         public static DataTable GetRoles()
         {
             const string sql = "SELECT RoleID, RoleName FROM Roles ORDER BY RoleName";
@@ -58,7 +58,7 @@ WHERE u.Username = @Username AND u.PasswordHash = @Password";
             }
         }
 
-        // ✅ ADD NEW USER
+        
         public static bool InsertUser(string fullName, string username, string passwordPlain, int roleId)
         {
             const string sql = @"
@@ -78,7 +78,7 @@ VALUES (@FullName, @Username, @Password, @RoleID)";
             }
         }
 
-        // ✅ GET ALL USERS (for AdminUserTablePage)
+        
         public static DataTable GetAllUsers()
         {
             const string sql = @"
@@ -96,7 +96,7 @@ ORDER BY u.UserID";
             }
         }
 
-        // ✅ DELETE USER (for Delete button)
+        
         public static bool DeleteUser(int userId)
         {
             const string sql = "DELETE FROM Users WHERE UserID = @UserID";

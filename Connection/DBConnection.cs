@@ -12,7 +12,7 @@ namespace TaskMateApp.Connection
             return new SqlConnection(connectionString);
         }
 
-        // ✅ Added method so DAL can call DBConnection.CreateCommand(sql)
+        
         public static SqlCommand CreateCommand(string sql)
         {
             var conn = new SqlConnection(connectionString);

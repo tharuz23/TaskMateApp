@@ -33,7 +33,7 @@ namespace TaskMateApp
             var progress = all.AsEnumerable().Where(r => r["ActivityStatus"].ToString() == "In Progress");
             var done = all.AsEnumerable().Where(r => r["ActivityStatus"].ToString() == "Done");
 
-            FillList(lstToDo, todo, false);      // ❌ no remove button here
+            FillList(lstToDo, todo, false);     
             FillList(lstProgress, progress, true);
             FillList(lstDone, done, true);
         }
@@ -52,7 +52,7 @@ namespace TaskMateApp
             box.DrawMode = DrawMode.OwnerDrawFixed;
             box.ItemHeight = 30;
 
-            // assign different draw handlers
+            
             if (allowRemove)
             {
                 box.DrawItem += (s, e) => DrawStyledItemWithRemove(s, e);
@@ -64,7 +64,7 @@ namespace TaskMateApp
             }
         }
 
-        // 🧱 Simple draw (no X)
+        
         private void DrawStyledItemSimple(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) return;
@@ -95,7 +95,7 @@ namespace TaskMateApp
             e.DrawFocusRectangle();
         }
 
-        // 🧱 Draw with small X
+        
         private void DrawStyledItemWithRemove(object sender, DrawItemEventArgs e)
         {
             if (e.Index < 0) return;
@@ -123,7 +123,7 @@ namespace TaskMateApp
                 new Rectangle(midX + 8, rect.Top + 6, 115, rect.Height),
                 Color.Gray, TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
 
-            // small X for remove
+            
             Rectangle closeRect = new Rectangle(rect.Right - 18, rect.Top + 7, 10, 10);
             using (Pen pen = new Pen(Color.Red, 1.8f))
             {

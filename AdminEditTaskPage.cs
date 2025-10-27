@@ -36,7 +36,7 @@ namespace TaskMateApp
             txtDueAt.Text = t.DueAt?.ToString("yyyy-MM-dd HH:mm") ?? "";
             chkLock.Checked = t.IsLocked;
 
-            // ✅ Restrict editing fully if locked by another admin
+            
             if (t.IsLocked && t.CreatedBy != _current.Username)
             {
                 txtTitle.ReadOnly = true;
@@ -52,7 +52,7 @@ namespace TaskMateApp
             }
             else
             {
-                // ✅ Allow editing but restrict lock toggle for non-creators
+                
                 if (t.CreatedBy != _current.Username)
                 {
                     chkLock.Enabled = false;
@@ -78,7 +78,7 @@ namespace TaskMateApp
             else
                 MessageBox.Show("No changes were made.");
 
-            // ✅ Update lock state only if same creator
+            
             if (currentTask.CreatedBy == _current.Username)
                 TaskBLL.LockTask(_taskId, chkLock.Checked);
 

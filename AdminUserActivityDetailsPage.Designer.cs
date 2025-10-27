@@ -110,7 +110,7 @@ namespace TaskMateApp
             this.Text = "AdminUserActivityDetailsPage";
         }
 
-        // 🎨 Custom styled item drawing (username | submitted time)
+        
         private void DrawStyledItem(object sender, DrawItemEventArgs e, Color hoverColor)
         {
             if (e.Index < 0) return;
@@ -132,19 +132,19 @@ namespace TaskMateApp
             using (SolidBrush bg = new SolidBrush(backColor))
                 e.Graphics.FillRectangle(bg, e.Bounds);
 
-            // vertical divider line (slightly adjusted)
+            // vertical divider line 
             int midX = e.Bounds.Left + (int)(e.Bounds.Width * 0.45);
             using (Pen pen = new Pen(Color.Gray, 1))
                 e.Graphics.DrawLine(pen, midX, e.Bounds.Top + 4, midX, e.Bounds.Bottom - 4);
 
-            // username (left)
+            // username
             TextRenderer.DrawText(
                 e.Graphics, user, e.Font,
                 new Rectangle(e.Bounds.Left + 8, e.Bounds.Top + 5, midX - e.Bounds.Left - 10, e.Bounds.Height),
                 Color.Black, TextFormatFlags.Left | TextFormatFlags.VerticalCenter
             );
 
-            // time (right, more visible)
+            // time 
             TextRenderer.DrawText(
                 e.Graphics, time, e.Font,
                 new Rectangle(midX + 5, e.Bounds.Top + 5, e.Bounds.Right - midX - 8, e.Bounds.Height),

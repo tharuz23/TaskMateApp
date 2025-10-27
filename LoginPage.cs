@@ -43,11 +43,10 @@ namespace TaskMateApp
             }
         }
 
-        // ✅ Add this missing method to fix CS1061 error
+        
         private void txtUser_TextChanged(object sender, EventArgs e)
         {
-            // This event handler is linked from Designer.
-            // You can leave it empty or add validation if you want.
+            
         }
     }
 }

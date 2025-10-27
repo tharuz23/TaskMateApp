@@ -54,7 +54,7 @@ namespace TaskMateApp
             this.dgvTasks.AllowUserToResizeRows = false;
             this.dgvTasks.BackgroundColor = Color.White;
 
-            // 🚫 Remove black border completely
+            
             this.dgvTasks.BorderStyle = BorderStyle.None;
             this.dgvTasks.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             this.dgvTasks.GridColor = Color.FromArgb(147, 197, 253);

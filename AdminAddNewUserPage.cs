@@ -17,7 +17,7 @@ namespace TaskMateApp
             LoadRoles();
         }
 
-        // ✅ Load roles from BLL
+        
         private void LoadRoles()
         {
             try
@@ -41,7 +41,7 @@ namespace TaskMateApp
             }
         }
 
-        // ✅ Add new user
+       
         private void btnAddUserMain_Click(object sender, EventArgs e)
         {
             string fullName = txtFullName.Text.Trim();
@@ -68,7 +68,6 @@ namespace TaskMateApp
             if (success)
             {
                 MessageBox.Show("✅ User added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                // 👉 Redirect to AdminUserTablePage instead of WelcomeAdminPage
                 new AdminUserTablePage(_current).Show();
                 this.Close();
             }
@@ -78,7 +77,7 @@ namespace TaskMateApp
             }
         }
 
-        // ✅ Back button
+       
         private void btnBack_Click(object sender, EventArgs e)
         {
             new AdminUserTablePage(_current).Show();

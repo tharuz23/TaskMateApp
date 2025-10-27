@@ -16,7 +16,7 @@ namespace TaskMateApp
             _current = current;
             _taskId = taskId;
             LoadTaskDetails();
-            LoadExistingStatus(); // ✅ load current status if already marked
+            LoadExistingStatus(); 
         }
 
         private void LoadTaskDetails()
@@ -30,7 +30,7 @@ namespace TaskMateApp
             }
         }
 
-        // ✅ Load previously saved status if it exists
+        
         private void LoadExistingStatus()
         {
             string existingStatus = ActivityBLL.GetUserActivityStatus(_current.Username, _taskId);
@@ -40,7 +40,7 @@ namespace TaskMateApp
             }
             else
             {
-                cmbStatus.SelectedIndex = -1; // empty for new task
+                cmbStatus.SelectedIndex = -1; 
             }
         }
 
@@ -59,7 +59,6 @@ namespace TaskMateApp
             if (success)
             {
                 MessageBox.Show("Activity status updated successfully!");
-                // ✅ Redirect to View My Activity page (instead of UserTaskTablePage)
                 new UserViewActivityTablePage(_current).Show();
                 this.Close();
             }

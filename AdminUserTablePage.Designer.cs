@@ -69,7 +69,7 @@ namespace TaskMateApp
             this.dgvUsers.RowTemplate.Height = 28;
             this.dgvUsers.CellContentClick += new DataGridViewCellEventHandler(this.dgvUsers_CellContentClick);
 
-            // ✅ Header style (match with Task Table)
+            // Header style
             headerStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             headerStyle.BackColor = Color.FromArgb(147, 197, 253);
             headerStyle.ForeColor = Color.Black;
@@ -80,7 +80,7 @@ namespace TaskMateApp
             this.dgvUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.dgvUsers.ColumnHeadersHeight = 38;
 
-            // ✅ Cell style (simple black text)
+            //  Cell style
             cellStyle.BackColor = Color.White;
             cellStyle.ForeColor = Color.Black;
             cellStyle.SelectionBackColor = Color.FromArgb(226, 239, 255);

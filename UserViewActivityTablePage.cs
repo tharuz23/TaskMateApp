@@ -23,7 +23,6 @@ namespace TaskMateApp
         {
             dgvActivities.AutoGenerateColumns = false;
 
-            // match your designer column bindings
             colTaskNo.DataPropertyName = "TaskID";
             colTitle.DataPropertyName = "TaskTitle";
             colStatus.DataPropertyName = "ActivityStatus";
@@ -40,14 +39,14 @@ namespace TaskMateApp
             dgvActivities.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvActivities.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            // keep same color when selected
+            
             dgvActivities.RowsDefaultCellStyle.SelectionBackColor = Color.Transparent;
             dgvActivities.RowsDefaultCellStyle.SelectionForeColor = Color.Black;
             dgvActivities.DefaultCellStyle.SelectionBackColor = Color.Transparent;
             dgvActivities.DefaultCellStyle.SelectionForeColor = Color.Black;
             dgvActivities.EnableHeadersVisualStyles = false;
 
-            // format date/time nicely
+            
             dgvActivities.CellFormatting += (s, e) =>
             {
                 if (e.RowIndex >= 0 && e.Value != null)
@@ -85,25 +84,25 @@ namespace TaskMateApp
                 string status = row.Cells[colStatus.Index].Value.ToString().Trim();
                 row.DefaultCellStyle.ForeColor = Color.Black;
 
-                // 🎨 Soft pastel-like row colors (less harsh)
+                
                 if (status.Equals("To Do", StringComparison.OrdinalIgnoreCase))
                 {
-                    row.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 204, 204); // soft pink-red
+                    row.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 204, 204); 
                 }
                 else if (status.Equals("In Progress", StringComparison.OrdinalIgnoreCase))
                 {
-                    row.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 247, 180); // light pastel yellow
+                    row.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 247, 180); 
                 }
                 else if (status.Equals("Done", StringComparison.OrdinalIgnoreCase))
                 {
-                    row.DefaultCellStyle.BackColor = Color.FromArgb(255, 204, 255, 204); // soft pastel green
+                    row.DefaultCellStyle.BackColor = Color.FromArgb(255, 204, 255, 204); 
                 }
                 else
                 {
                     row.DefaultCellStyle.BackColor = Color.White;
                 }
 
-                // ✅ Keep same color even when selected
+                
                 row.DefaultCellStyle.SelectionBackColor = row.DefaultCellStyle.BackColor;
                 row.DefaultCellStyle.SelectionForeColor = row.DefaultCellStyle.ForeColor;
             }

@@ -10,8 +10,6 @@ namespace TaskMateApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            // This line decides which form opens first 👇
             Application.Run(new HomePage());
         }
     }

@@ -20,23 +20,21 @@ namespace TaskMateApp
 
         private void WelcomeAdminPage_Load(object sender, EventArgs e)
         {
-            // ✅ Highlight TaskMate by default
+            
             HighlightButton(btnTaskMate);
         }
 
-        // ✅ Helper method: highlights one button and resets others
+   
         private void HighlightButton(Button activeButton)
         {
             Color highlight = Color.FromArgb(147, 197, 253);
             Color normal = Color.White;
 
-            // Reset all buttons to normal
+            
             btnTaskMate.BackColor = normal;
             btnManageTasks.BackColor = normal;
             btnViewActivities.BackColor = normal;
             btnAddUser.BackColor = normal;
-
-            // Highlight the active one
             activeButton.BackColor = highlight;
         }
 

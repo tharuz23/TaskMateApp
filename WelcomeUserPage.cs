@@ -20,11 +20,11 @@ namespace TaskMateApp
 
         private void WelcomeUserPage_Load(object sender, EventArgs e)
         {
-            // Highlight TaskMate by default
+           
             HighlightButton(btnTaskMate);
         }
 
-        // ✅ Button highlight logic
+        
         private void HighlightButton(Button active)
         {
             Color highlight = Color.FromArgb(147, 197, 253);

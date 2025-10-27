@@ -19,7 +19,6 @@ namespace TaskMateApp.BLL
         public static int AddTask(string title, string description, int supervisorUserId, DateTime? dueAt, string createdBy)
             => TaskDAL.AddTask(title, description, supervisorUserId, dueAt, createdBy);
 
-        // ✅ NEW METHOD — Allows creating a locked task directly
         public static int AddTaskWithLock(string title, string description, int supervisorUserId, DateTime? dueAt, string createdBy, bool isLocked)
             => TaskDAL.AddTaskWithLock(title, description, supervisorUserId, dueAt, createdBy, isLocked);
 

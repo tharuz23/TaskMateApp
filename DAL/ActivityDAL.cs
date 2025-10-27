@@ -7,7 +7,7 @@ namespace TaskMateApp.DAL
 {
     public static class ActivityDAL
     {
-        // ✅ Get all activities (Admin view)
+        
         public static DataTable GetAllActivities()
         {
             var dt = new DataTable();
@@ -38,7 +38,7 @@ ORDER BY ua.SubmittedAt DESC;";
             return dt;
         }
 
-        // ✅ Insert or update (Upsert)
+        
         public static bool UpsertUserActivity(string username, int taskId, string statusName)
         {
             using (var conn = DBConnection.GetConnection())
@@ -54,7 +54,7 @@ ORDER BY ua.SubmittedAt DESC;";
             }
         }
 
-        // ✅ Filter activities by task or status (exclude OIC/CO admins)
+        
         public static DataTable GetActivitiesFiltered(int? taskId, string statusName)
         {
             var dt = new DataTable();
@@ -87,7 +87,7 @@ ORDER BY ua.SubmittedAt DESC;";
             return dt;
         }
 
-        // ✅ Get activities for logged-in user
+        
         public static DataTable GetActivitiesByUsername(string username)
         {
             var dt = new DataTable();
@@ -116,7 +116,7 @@ ORDER BY ua.SubmittedAt DESC;";
             return dt;
         }
 
-        // ✅ Delete specific activity
+        
         public static bool DeleteActivity(int activityId)
         {
             const string sql = @"DELETE FROM UserActivities WHERE ActivityID = @id";
@@ -129,7 +129,7 @@ ORDER BY ua.SubmittedAt DESC;";
             }
         }
 
-        // ✅ Reset all activities for a given task (to "To Do")
+        
         public static bool ResetToDoByTask(int taskId)
         {
             const string sql = @"
@@ -140,7 +140,7 @@ FROM UserActivities ua
 JOIN ActivityStatuses s ON s.StatusName = 'To Do'
 JOIN Users u ON u.UserID = ua.UserID
 JOIN Roles r ON r.RoleID = u.RoleID
-WHERE ua.TaskID = @TaskID AND r.RoleName = 'User';"; // ✅ ensures only Users are affected
+WHERE ua.TaskID = @TaskID AND r.RoleName = 'User';"; 
 
             using (var conn = DBConnection.GetConnection())
             using (var cmd = new SqlCommand(sql, conn))
@@ -151,7 +151,7 @@ WHERE ua.TaskID = @TaskID AND r.RoleName = 'User';"; // ✅ ensures only Users a
             }
         }
 
-        // ✅ Get user activity status
+       
         public static string GetUserActivityStatus(string username, int taskId)
         {
             const string sql = @"
@@ -172,7 +172,7 @@ WHERE u.Username = @Username AND ua.TaskID = @TaskID";
             }
         }
 
-        // ✅ Reset a specific user's activity to "To Do"
+        
         public static bool ResetUserToDo(int taskId, string fullName)
         {
             const string sql = @"
@@ -185,7 +185,7 @@ JOIN Users u ON u.UserID = ua.UserID
 JOIN Roles r ON r.RoleID = u.RoleID
 WHERE ua.TaskID = @TaskID 
   AND u.FullName = @FullName
-  AND r.RoleName = 'User';";  // ✅ only affects users
+  AND r.RoleName = 'User';";  
 
             using (var conn = DBConnection.GetConnection())
             using (var cmd = new SqlCommand(sql, conn))

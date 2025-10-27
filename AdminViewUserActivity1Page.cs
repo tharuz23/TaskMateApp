@@ -75,7 +75,7 @@ namespace TaskMateApp
             e.PaintBackground(e.CellBounds, true);
 
             int buttonWidth = 70;
-            int buttonHeight = 18; // 🔹 reduced height
+            int buttonHeight = 18; 
             int x = e.CellBounds.Left + (e.CellBounds.Width - buttonWidth) / 2;
             int y = e.CellBounds.Top + (e.CellBounds.Height - buttonHeight) / 2;
             Rectangle buttonRect = new Rectangle(x, y, buttonWidth, buttonHeight);

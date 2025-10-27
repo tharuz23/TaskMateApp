@@ -120,7 +120,7 @@ VALUES(@t, @d, @s, @due, @cb, 0)";
             return id;
         }
 
-        // ✅ NEW OVERLOAD — Allows adding tasks with IsLocked true/false
+        
         public static int AddTaskWithLock(string title, string description, int supervisorUserId, DateTime? dueAt, string createdBy, bool isLocked)
         {
             const string sql = @"

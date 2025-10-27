@@ -39,7 +39,7 @@ namespace TaskMateApp
 
             foreach (var t in tasks)
             {
-                // 🔒 Lock icon moved AFTER number
+                
                 string displayId = t.IsLocked ? $"{t.TaskID} 🔒" : t.TaskID.ToString();
 
                 int rowIndex = dgvTasks.Rows.Add(
@@ -96,7 +96,7 @@ namespace TaskMateApp
             string colName = dgvTasks.Columns[e.ColumnIndex].Name;
             if (colName == "manageColumn")
             {
-                // Adjusted to trim lock symbol after number
+               
                 var idValue = dgvTasks.Rows[e.RowIndex].Cells["colTaskNo"].Value.ToString().Replace("🔒", "").Trim();
                 int taskId = Convert.ToInt32(idValue);
 

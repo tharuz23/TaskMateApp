@@ -43,7 +43,7 @@ namespace TaskMateApp
             }
         }
 
-        // 🔹 Custom Delete button (slimmer height)
+        
         private void dgvUsers_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex != dgvUsers.Columns["manageColumn"].Index)
@@ -52,7 +52,7 @@ namespace TaskMateApp
             e.PaintBackground(e.CellBounds, true);
 
             int buttonWidth = 70;
-            int buttonHeight = 18; // 🔽 reduced from 26 → 18 for cleaner look
+            int buttonHeight = 18; 
             int x = e.CellBounds.Left + (e.CellBounds.Width - buttonWidth) / 2;
             int y = e.CellBounds.Top + (e.CellBounds.Height - buttonHeight) / 2;
             Rectangle buttonRect = new Rectangle(x, y, buttonWidth, buttonHeight);

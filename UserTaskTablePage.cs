@@ -47,36 +47,35 @@ namespace TaskMateApp
                 var row = dgvTasks.Rows[rowIndex];
                 row.Cells["colDescription"].Style.WrapMode = DataGridViewTriState.True;
 
-                // 🔹 Reset default colors
+               
                 row.DefaultCellStyle.BackColor = Color.White;
                 row.DefaultCellStyle.ForeColor = Color.Black;
 
-                // 🔹 Make Due Date text red if overdue
+                
                 if (t.DueAt.HasValue && DateTime.Now > t.DueAt.Value)
                 {
                     row.Cells["colDueAt"].Style.ForeColor = Color.Red;
                 }
 
-                // 🔹 Fetch user status (from activity table)
                 string status = ActivityBLL.GetUserActivityStatus(_current.Username, t.TaskID);
 
                 if (!string.IsNullOrEmpty(status))
                 {
                     if (status.Equals("To Do", StringComparison.OrdinalIgnoreCase))
                     {
-                        row.Cells["colTaskID"].Style.BackColor = Color.FromArgb(255, 255, 204, 204); // light red
+                        row.Cells["colTaskID"].Style.BackColor = Color.FromArgb(255, 255, 204, 204); 
                     }
                     else if (status.Equals("In Progress", StringComparison.OrdinalIgnoreCase))
                     {
-                        row.Cells["colTaskID"].Style.BackColor = Color.FromArgb(255, 255, 247, 180); // light yellow
+                        row.Cells["colTaskID"].Style.BackColor = Color.FromArgb(255, 255, 247, 180); 
                     }
                     else if (status.Equals("Done", StringComparison.OrdinalIgnoreCase))
                     {
-                        row.Cells["colTaskID"].Style.BackColor = Color.FromArgb(255, 204, 255, 204); // light green
+                        row.Cells["colTaskID"].Style.BackColor = Color.FromArgb(255, 204, 255, 204); 
                     }
                 }
 
-                // keep same color when selected
+                
                 foreach (DataGridViewCell c in row.Cells)
                 {
                     c.Style.SelectionBackColor = c.Style.BackColor;
@@ -97,7 +96,7 @@ namespace TaskMateApp
             }
         }
 
-        // ✅ Custom green bordered "View" button (same as before)
+        
         private void dgvTasks_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             if (e.RowIndex < 0 || e.ColumnIndex != dgvTasks.Columns["manageColumn"].Index)
