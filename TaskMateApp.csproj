@@ -22,6 +22,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,14 +48,130 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="AdminAddNewUserPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="AdminAddNewUserPage.Designer.cs">
+      <DependentUpon>AdminAddNewUserPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminAddTaskPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminAddTaskPage.Designer.cs">
+      <DependentUpon>AdminAddTaskPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminEditTaskPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminEditTaskPage.Designer.cs">
+      <DependentUpon>AdminEditTaskPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminMyTasksPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminMyTasksPage.Designer.cs">
+      <DependentUpon>AdminMyTasksPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminTaskTablePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminTaskTablePage.Designer.cs">
+      <DependentUpon>AdminTaskTablePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminUserActivityDetailsPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminUserActivityDetailsPage.Designer.cs">
+      <DependentUpon>AdminUserActivityDetailsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminUserTablePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminUserTablePage.Designer.cs">
+      <DependentUpon>AdminUserTablePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminViewUserActivity1Page.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminViewUserActivity1Page.Designer.cs">
+      <DependentUpon>AdminViewUserActivity1Page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BAL\ActivityBLL.cs" />
+    <Compile Include="BAL\TaskBLL.cs" />
+    <Compile Include="BAL\UserBLL.cs" />
+    <Compile Include="Classes\ActivityStatus.cs" />
+    <Compile Include="Classes\TaskItem.cs" />
+    <Compile Include="Classes\User.cs" />
+    <Compile Include="Classes\UserActivity.cs" />
+    <Compile Include="Connection\DBConnection.cs" />
+    <Compile Include="DAL\ActivityDAL.cs" />
+    <Compile Include="DAL\TaskDAL.cs" />
+    <Compile Include="DAL\UserDAL.cs" />
+    <Compile Include="LoginPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginPage.Designer.cs">
+      <DependentUpon>LoginPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HomePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HomePage.Designer.cs">
+      <DependentUpon>HomePage.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserManageActivityPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserManageActivityPage.Designer.cs">
+      <DependentUpon>UserManageActivityPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserTaskTablePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserTaskTablePage.Designer.cs">
+      <DependentUpon>UserTaskTablePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserViewActivityTablePage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserViewActivityTablePage.Designer.cs">
+      <DependentUpon>UserViewActivityTablePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WelcomeAdminPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WelcomeAdminPage.Designer.cs">
+      <DependentUpon>WelcomeAdminPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WelcomeUserPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WelcomeUserPage.Designer.cs">
+      <DependentUpon>WelcomeUserPage.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AdminAddNewUserPage.resx">
+      <DependentUpon>AdminAddNewUserPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminAddTaskPage.resx">
+      <DependentUpon>AdminAddTaskPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminEditTaskPage.resx">
+      <DependentUpon>AdminEditTaskPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminTaskTablePage.resx">
+      <DependentUpon>AdminTaskTablePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminViewUserActivity1Page.resx">
+      <DependentUpon>AdminViewUserActivity1Page.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HomePage.resx">
+      <DependentUpon>HomePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginPage.resx">
+      <DependentUpon>LoginPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,7 +180,23 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UserManageActivityPage.resx">
+      <DependentUpon>UserManageActivityPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserTaskTablePage.resx">
+      <DependentUpon>UserTaskTablePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserViewActivityTablePage.resx">
+      <DependentUpon>UserViewActivityTablePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WelcomeAdminPage.resx">
+      <DependentUpon>WelcomeAdminPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WelcomeUserPage.resx">
+      <DependentUpon>WelcomeUserPage.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -76,5 +210,13 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="HomePageImage.png" />
+    <Content Include="TaskImage.png" />
+    <Content Include="TaskMateLogo.png" />
+    <Content Include="ViewTaskPage.jpeg" />
+    <Content Include="WelcomePageImage.jpg" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
