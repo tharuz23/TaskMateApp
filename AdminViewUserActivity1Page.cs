@@ -11,6 +11,7 @@ namespace TaskMateApp
     public partial class AdminViewUserActivity1Page : Form
     {
         private readonly User _current;
+        private Timer refreshTimer; 
 
         public AdminViewUserActivity1Page(User current)
         {
@@ -23,47 +24,93 @@ namespace TaskMateApp
             dgvActivities.RowHeadersVisible = false;
 
             dgvActivities.CellPainting += dgvActivities_CellPainting;
-            LoadActivities();
+
+            LoadActivities();     
+            StartAutoRefresh();   
+        }
+
+        private void StartAutoRefresh()
+        {
+            refreshTimer = new Timer();
+            refreshTimer.Interval = 5000; 
+            refreshTimer.Tick += (s, e) => LoadActivities();
+            refreshTimer.Start();
         }
 
         private void LoadActivities()
         {
-            dgvActivities.Rows.Clear();
-            DataTable activities = ActivityBLL.GetAll();
-            if (activities == null || activities.Rows.Count == 0) return;
-
-            var groupedTasks = activities.AsEnumerable()
-                .GroupBy(r => new
-                {
-                    TaskID = r["TaskID"],
-                    TaskTitle = r["TaskTitle"],
-                    Supervisor = r["Supervisor"],
-                    DueAt = r["DueAt"]
-                });
-
-            foreach (var group in groupedTasks)
+            try
             {
-                string supervisor = group.Key.Supervisor?.ToString() ?? "—";
-                string dueAt = group.Key.DueAt == DBNull.Value
-                    ? "—"
-                    : Convert.ToDateTime(group.Key.DueAt).ToString("yyyy-MM-dd HH:mm");
+                dgvActivities.Rows.Clear();
 
-                int index = dgvActivities.Rows.Add(
-                    group.Key.TaskID,
-                    group.Key.TaskTitle,
-                    supervisor,
-                    dueAt,
-                    "View"
-                );
+                
+                DataTable activities = ActivityBLL.GetAll();
 
-                if (group.Key.DueAt != DBNull.Value &&
-                    Convert.ToDateTime(group.Key.DueAt) < DateTime.Now)
+                
+                if (activities == null || activities.Rows.Count == 0)
                 {
-                    dgvActivities.Rows[index].Cells["colDueAt"].Style.ForeColor = Color.Red;
+                    var allTasks = TaskBLL.GetAllTasks();
+                    foreach (var task in allTasks)
+                    {
+                        string supervisor = task.Supervisor ?? "—";
+                        string dueAt = task.DueAt.HasValue
+                            ? task.DueAt.Value.ToString("yyyy-MM-dd HH:mm")
+                            : "—";
+
+                        int idx = dgvActivities.Rows.Add(
+                            task.TaskID,
+                            task.Title,
+                            supervisor,
+                            dueAt,
+                            "View"
+                        );
+
+                        if (task.DueAt.HasValue && task.DueAt.Value < DateTime.Now)
+                            dgvActivities.Rows[idx].Cells["colDueAt"].Style.ForeColor = Color.Red;
+                    }
+
+                    return;
                 }
 
-                dgvActivities.Rows[index].Height =
-                    dgvActivities.Rows[index].GetPreferredHeight(index, DataGridViewAutoSizeRowMode.AllCells, true);
+                
+                var groupedTasks = activities.AsEnumerable()
+                    .GroupBy(r => new
+                    {
+                        TaskID = r["TaskID"],
+                        TaskTitle = r["TaskTitle"],
+                        Supervisor = r["Supervisor"],
+                        DueAt = r["DueAt"]
+                    });
+
+                foreach (var group in groupedTasks)
+                {
+                    string supervisor = group.Key.Supervisor?.ToString() ?? "—";
+                    string dueAt = group.Key.DueAt == DBNull.Value
+                        ? "—"
+                        : Convert.ToDateTime(group.Key.DueAt).ToString("yyyy-MM-dd HH:mm");
+
+                    int index = dgvActivities.Rows.Add(
+                        group.Key.TaskID,
+                        group.Key.TaskTitle,
+                        supervisor,
+                        dueAt,
+                        "View"
+                    );
+
+                    if (group.Key.DueAt != DBNull.Value &&
+                        Convert.ToDateTime(group.Key.DueAt) < DateTime.Now)
+                    {
+                        dgvActivities.Rows[index].Cells["colDueAt"].Style.ForeColor = Color.Red;
+                    }
+
+                    dgvActivities.Rows[index].Height =
+                        dgvActivities.Rows[index].GetPreferredHeight(index, DataGridViewAutoSizeRowMode.AllCells, true);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load activities: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -75,7 +122,7 @@ namespace TaskMateApp
             e.PaintBackground(e.CellBounds, true);
 
             int buttonWidth = 70;
-            int buttonHeight = 18; 
+            int buttonHeight = 18;
             int x = e.CellBounds.Left + (e.CellBounds.Width - buttonWidth) / 2;
             int y = e.CellBounds.Top + (e.CellBounds.Height - buttonHeight) / 2;
             Rectangle buttonRect = new Rectangle(x, y, buttonWidth, buttonHeight);
@@ -114,6 +161,7 @@ namespace TaskMateApp
 
         private void btnBack_Click(object sender, EventArgs e)
         {
+            refreshTimer?.Stop();
             new WelcomeAdminPage(_current).Show();
             this.Close();
         }
