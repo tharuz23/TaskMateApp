@@ -11,7 +11,9 @@ namespace TaskMateApp.DAL
         public static List<TaskItem> GetAllTasksFromView()
         {
             var list = new List<TaskItem>();
-            const string sql = @"SELECT TaskNo, Title, Description, Supervisor, DueAt, IsLocked, CreatedBy FROM v_AdminTasks ORDER BY TaskNo";
+            const string sql = @"SELECT TaskNo, Title, Description, Supervisor, DueAt, IsLocked, CreatedBy 
+                                 FROM v_AdminTasks 
+                                 ORDER BY TaskNo";
             var cmd = DBConnection.CreateCommand(sql);
             cmd.Connection.Open();
             var rd = cmd.ExecuteReader();
@@ -34,15 +36,26 @@ namespace TaskMateApp.DAL
             return list;
         }
 
+        // ✅ FIXED FUNCTION — shows tasks created by OR supervised by the logged-in admin
         public static List<TaskItem> GetTasksByCreator(string username)
         {
             var list = new List<TaskItem>();
-            const string sql = @"SELECT TaskID, Title, Description, SupervisorUserID, DueAt, IsLocked, CreatedBy 
-                                 FROM Tasks 
-                                 WHERE CreatedBy=@u ORDER BY TaskID DESC";
+
+            const string sql = @"
+SELECT t.TaskID, t.Title, t.Description,
+       (u.FullName + ' (' + r.RoleName + ')') AS Supervisor,
+       t.DueAt, t.IsLocked, t.CreatedBy
+FROM Tasks t
+JOIN Users u ON u.UserID = t.SupervisorUserID
+JOIN Roles r ON r.RoleID = u.RoleID
+WHERE t.CreatedBy = @u
+   OR u.Username = @u
+ORDER BY t.TaskID DESC";
+
             var cmd = DBConnection.CreateCommand(sql);
             cmd.Parameters.AddWithValue("@u", username);
             cmd.Connection.Open();
+
             var rd = cmd.ExecuteReader();
             while (rd.Read())
             {
@@ -51,13 +64,14 @@ namespace TaskMateApp.DAL
                     TaskID = rd.GetInt32(0),
                     Title = rd.GetString(1),
                     Description = rd.IsDBNull(2) ? "" : rd.GetString(2),
-                    SupervisorUserID = rd.GetInt32(3),
+                    Supervisor = rd.GetString(3),
                     DueAt = rd.IsDBNull(4) ? (DateTime?)null : rd.GetDateTime(4),
                     IsLocked = !rd.IsDBNull(5) && rd.GetBoolean(5),
                     CreatedBy = rd.IsDBNull(6) ? "" : rd.GetString(6)
                 };
                 list.Add(item);
             }
+
             rd.Close();
             cmd.Connection.Close();
             return list;
@@ -120,7 +134,6 @@ VALUES(@t, @d, @s, @due, @cb, 0)";
             return id;
         }
 
-        
         public static int AddTaskWithLock(string title, string description, int supervisorUserId, DateTime? dueAt, string createdBy, bool isLocked)
         {
             const string sql = @"
