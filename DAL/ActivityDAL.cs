@@ -71,7 +71,7 @@ JOIN Users u ON u.UserID = ua.UserID
 JOIN Roles ro ON ro.RoleID = u.RoleID
 JOIN Tasks t ON t.TaskID = ua.TaskID
 JOIN ActivityStatuses s ON s.StatusID = ua.StatusID
-WHERE ro.RoleName = 'User'  -- ✅ Only regular users
+WHERE ro.RoleName = 'User'  
   AND (@TaskID IS NULL OR ua.TaskID = @TaskID)
   AND (@StatusName IS NULL OR s.StatusName = @StatusName)
 ORDER BY ua.SubmittedAt DESC;";
