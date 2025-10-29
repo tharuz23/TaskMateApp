@@ -36,7 +36,7 @@ namespace TaskMateApp.DAL
             return list;
         }
 
-        // ✅ FIXED FUNCTION — shows tasks created by OR supervised by the logged-in admin
+        
         public static List<TaskItem> GetTasksByCreator(string username)
         {
             var list = new List<TaskItem>();
