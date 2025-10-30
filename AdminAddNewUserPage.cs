@@ -67,7 +67,7 @@ namespace TaskMateApp
 
             if (success)
             {
-                MessageBox.Show("✅ User added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("User added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 new AdminUserTablePage(_current).Show();
                 this.Close();
             }
